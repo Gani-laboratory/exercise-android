@@ -1,8 +1,13 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.Latihan" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Base.Theme.Latihan" parent="Theme.Material3.DayNight">
         <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+         <item name="colorPrimary">#0C11FF</item>
+    </style>
+
+    <style name="Red">
+        <item name="android:textColor">#FF0000</item>
+        <item name="android:textSize">30sp</item>
     </style>
 
     <style name="Theme.Latihan" parent="Base.Theme.Latihan" />
