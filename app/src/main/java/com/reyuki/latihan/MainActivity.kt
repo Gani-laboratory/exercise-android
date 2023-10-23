@@ -55,14 +55,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun showRecyclerList() {
         rvHeroes.layoutManager = LinearLayoutManager(this)
-        val listHeroAdapter = ListHeroAdapter(list)
+        val listHeroAdapter = ListHeroAdapter(list) {
+            showSelectedHero(it)
+        }
         rvHeroes.adapter = listHeroAdapter
-
-        listHeroAdapter.setOnItemClickCallback(object : ListHeroAdapter.OnItemClickCallback {
-            override fun onItemClicked(data: Hero) {
-                showSelectedHero(data)
-            }
-        })
     }
 
     private fun showSelectedHero(hero: Hero) {
