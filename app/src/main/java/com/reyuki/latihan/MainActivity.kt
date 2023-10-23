@@ -1,9 +1,9 @@
 package com.reyuki.latihan
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -49,6 +49,7 @@ class MainActivity : AppCompatActivity() {
             val hero = Hero(dataName[i], dataDescription[i], dataPhoto.getResourceId(i, -1))
             listHero.add(hero)
         }
+        dataPhoto.recycle()
 
         return listHero
     }
@@ -60,12 +61,10 @@ class MainActivity : AppCompatActivity() {
 
         listHeroAdapter.setOnItemClickCallback(object : ListHeroAdapter.OnItemClickCallback {
             override fun onItemClicked(data: Hero) {
-                showSelectedHero(data)
+                val intentToDetail = Intent(this@MainActivity, DetailActivity::class.java)
+                intentToDetail.putExtra("DATA", data)
+                startActivity(intentToDetail)
             }
         })
-    }
-
-    private fun showSelectedHero(hero: Hero) {
-        Toast.makeText(this, "Kamu memilih " + hero.name, Toast.LENGTH_SHORT).show()
     }
 }
