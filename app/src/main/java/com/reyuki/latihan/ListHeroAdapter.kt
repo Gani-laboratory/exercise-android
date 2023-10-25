@@ -5,9 +5,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.reyuki.latihan.databinding.ItemRowHeroBinding
 
-class ListHeroAdapter(private val listHero: ArrayList<Hero>) : RecyclerView.Adapter<ListHeroAdapter.ListViewHolder>() {
-    private lateinit var onItemClickCallback: OnItemClickCallback
-    class ListViewHolder(var binding: ItemRowHeroBinding) : RecyclerView.ViewHolder(binding.root)
+class ListHeroAdapter(private val listHero: ArrayList<Hero>, private val onClick: (Hero) -> Unit) : RecyclerView.Adapter<ListHeroAdapter.ListViewHolder>() {
+    inner class ListViewHolder(var binding: ItemRowHeroBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(hero: Hero) {
+            itemView.setOnClickListener {
+                onClick(hero)
+            }
+        }
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
         val binding = ItemRowHeroBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -22,14 +27,6 @@ class ListHeroAdapter(private val listHero: ArrayList<Hero>) : RecyclerView.Adap
         holder.binding.tvItemName.text = name
         holder.binding.tvDescription.text = description
 
-        holder.itemView.setOnClickListener { onItemClickCallback.onItemClicked(listHero[holder.adapterPosition]) }
-    }
-
-    fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
-        this.onItemClickCallback = onItemClickCallback
-    }
-
-    interface OnItemClickCallback {
-        fun onItemClicked(data: Hero)
+        holder.bind(listHero[holder.adapterPosition])
     }
 }

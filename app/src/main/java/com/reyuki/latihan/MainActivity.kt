@@ -59,15 +59,15 @@ class MainActivity : AppCompatActivity() {
 
     private fun showRecyclerList() {
         rvHeroes.layoutManager = LinearLayoutManager(this)
-        val listHeroAdapter = ListHeroAdapter(list)
+        val listHeroAdapter = ListHeroAdapter(list) {
+            onItemClicked(it)
+        }
         rvHeroes.adapter = listHeroAdapter
+    }
 
-        listHeroAdapter.setOnItemClickCallback(object : ListHeroAdapter.OnItemClickCallback {
-            override fun onItemClicked(data: Hero) {
-                val intentToDetail = Intent(this@MainActivity, DetailActivity::class.java)
-                intentToDetail.putExtra("DATA", data)
-                startActivity(intentToDetail)
-            }
-        })
+    private fun onItemClicked(data: Hero) {
+        val intentToDetail = Intent(this@MainActivity, DetailActivity::class.java)
+        intentToDetail.putExtra("DATA", data)
+        startActivity(intentToDetail)
     }
 }
